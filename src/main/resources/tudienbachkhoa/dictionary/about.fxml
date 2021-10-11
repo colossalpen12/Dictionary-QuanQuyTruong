@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="400.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tudienbachkhoa.dictionary.SceneController">
+   <children>
+      <AnchorPane prefHeight="200.0" prefWidth="400.0" style="-fx-background-color: #fa983a#fa983a;">
+         <children>
+            <Label layoutX="153.0" layoutY="12.0" text="Dictionary 1.0">
+               <font>
+                  <Font name="Roboto" size="13.0" />
+               </font>
+            </Label>
+            <Label layoutX="158.0" layoutY="39.0" text="phát triển bởi">
+               <font>
+                  <Font name="Roboto Light" size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="145.0" layoutY="71.0" text="Nguyễn Duy Quý">
+               <font>
+                  <Font name="Roboto Light" size="13.0" />
+               </font>
+            </Label>
+            <Label layoutX="157.0" layoutY="92.0" text="Lê Việt Quân">
+               <font>
+                  <Font name="Roboto Light" size="13.0" />
+               </font>
+            </Label>
+            <Label layoutX="126.0" layoutY="112.0" text="Nguyễn Đức Việt Trường">
+               <font>
+                  <Font name="Roboto Light" size="13.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
