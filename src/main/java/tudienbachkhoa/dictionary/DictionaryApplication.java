@@ -10,6 +10,8 @@ import javafx.stage.StageStyle;
 
 import java.io.IOException;
 
+/** this one loads the app. **/
+
 public class DictionaryApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {

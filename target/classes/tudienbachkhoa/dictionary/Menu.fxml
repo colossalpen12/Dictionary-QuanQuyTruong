@@ -44,6 +44,7 @@
                   <Font name="Raleway ExtraLight" size="31.0" />
                </font>
             </Text>
+            <Button layoutX="1.0" layoutY="2.0" mnemonicParsing="false" onAction="#switchToGoogleTranslate" opacity="0.0" prefHeight="236.0" prefWidth="318.0" text="ggltranslate" />
          </children></AnchorPane>
       <AnchorPane id="dictionary-opening" layoutX="41.0" layoutY="188.0" opacity="0.7" prefHeight="235.0" prefWidth="320.0" style="-fx-background-color: #4bcffa#4bcffa; -fx-background-radius: 15 50; -fx-border-radius: 15 50;">
          <children>

@@ -18,6 +18,8 @@ public class SceneController {
     private Stage stage;
     private Scene scene;
 
+
+    /** All about switching scenes. **/
     @FXML
     public void switchToSettings(ActionEvent e) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("OptionsView.fxml"));
@@ -29,15 +31,6 @@ public class SceneController {
     }
 
     @FXML
-    public void switchToMainMenu(ActionEvent e) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("Menu.fxml"));
-        scene = new Scene(root);
-        scene.setFill(Color.TRANSPARENT);
-        stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
-        stage.setScene(scene);
-        stage.show();
-    }
-
     public void OpenDictionary(ActionEvent e) throws IOException{
         Parent root = FXMLLoader.load(getClass().getResource("DictionaryView.fxml"));
         scene = new Scene(root);
@@ -47,6 +40,7 @@ public class SceneController {
         stage.show();
     }
 
+    @FXML
     public void openAbout(ActionEvent event) throws IOException{
         Parent root = FXMLLoader.load(getClass().getResource("about.fxml"));
         Scene abt = new Scene(root);
@@ -57,6 +51,16 @@ public class SceneController {
         about.show();
     }
 
+    public void switchToGoogleTranslate(ActionEvent e) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("GoogleTranslateView.fxml"));
+        scene = new Scene(root);
+        scene.setFill(Color.TRANSPARENT);
+        stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    @FXML
     public void ExitApp(ActionEvent event) {
         Platform.exit();
     }
