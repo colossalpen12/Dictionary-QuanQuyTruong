@@ -2,12 +2,13 @@ package tudienbachkhoa.dictionary;
 
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.control.Button;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
@@ -46,7 +47,17 @@ public class SceneController {
         stage.show();
     }
 
-    public void ExitApp(ActionEvent event) throws IOException{
+    public void openAbout(ActionEvent event) throws IOException{
+        Parent root = FXMLLoader.load(getClass().getResource("about.fxml"));
+        Scene abt = new Scene(root);
+        abt.setFill(Color.TRANSPARENT);
+        Stage about = new Stage();
+        about.setTitle("About");
+        about.setScene(abt);
+        about.show();
+    }
+
+    public void ExitApp(ActionEvent event) {
         Platform.exit();
     }
 }

@@ -10,6 +10,7 @@ module tudienbachkhoa.dictionary {
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
     requires javafx.graphics;
+    requires charm.glisten;
 
     opens tudienbachkhoa.dictionary to javafx.fxml;
     exports tudienbachkhoa.dictionary;
