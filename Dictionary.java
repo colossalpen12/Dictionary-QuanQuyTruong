@@ -2,7 +2,7 @@ import java.sql.*;
 import java.util.*;
 
 public class Dictionary {
-    public class Word {
+    static class Word {
         String word_explain;
         String word_target;
 
@@ -12,17 +12,28 @@ public class Dictionary {
         }
     }
 
-    public ArrayList<Word> Dict = new ArrayList<Word>();
-    TrieHash demo = new TrieHash();
-    public Map<String, String> demo_map = new HashMap<String, String>();
+    public ArrayList<Word> Dict = new ArrayList<>();
+    HashTrie demo = new HashTrie();
+    public Map<String, String> demo_map = new HashMap<>();
 
+    /**
+     * choose modes for dictionary (av, va, aa)
+     * @return preferred mode
+     */
+    static String chooseMode() {
+        Scanner sc = new Scanner(System.in);
+        return sc.next();
+    }
+
+    /**
+     * Retrieve selected data from sqlite database
+     */
     public void Retrieve() {
+        // change url to "jbdc:sqlite:path to database"
         String url = "jdbc:sqlite:C:/Users/quyhd/Downloads/AVIE.db";
-        String sql = "SELECT word, description FROM av";
-        Connection conn = null;
-
+        String sql = "SELECT word, description FROM " + chooseMode();
         try {
-            conn = DriverManager.getConnection(url);
+            Connection conn = DriverManager.getConnection(url);
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
             while (rs.next()) {
