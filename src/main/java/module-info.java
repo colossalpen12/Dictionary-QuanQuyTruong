@@ -11,7 +11,10 @@ module tudienbachkhoa.dictionary {
     requires eu.hansolo.tilesfx;
     requires javafx.graphics;
     requires charm.glisten;
+    requires java.sql;
+    requires com.jfoenix;
 
     opens tudienbachkhoa.dictionary to javafx.fxml;
     exports tudienbachkhoa.dictionary;
+
 }

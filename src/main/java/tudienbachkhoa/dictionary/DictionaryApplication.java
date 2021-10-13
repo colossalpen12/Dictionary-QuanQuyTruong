@@ -28,3 +28,19 @@ public class DictionaryApplication extends Application {
         launch();
     }
 }
+
+/**
+ --add-exports=javafx.base/com.sun.javafx.event=org.controlsfx.control
+ --add-exports
+ javafx.controls/com.sun.javafx.scene.control.behavior=com.jfoenix
+ --add-exports
+ javafx.controls/com.sun.javafx.scene.control=com.jfoenix
+ --add-exports
+ javafx.base/com.sun.javafx.binding=com.jfoenix
+ --add-exports
+ javafx.graphics/com.sun.javafx.stage=com.jfoenix
+ --add-exports
+ javafx.base/com.sun.javafx.event=com.jfoenix
+
+ nếu không chạy được thì thêm tất cả chỗ kia vào running configuration
+ */
