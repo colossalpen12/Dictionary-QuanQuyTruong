@@ -55,7 +55,7 @@ public class SearchCoreController implements Initializable {
         if (SearchHistory != null) {
             autoCompletePopup.getSuggestions().addAll(SearchHistory);
         } else {
-            autoCompletePopup.getSuggestions().addAll(input.demo.prefixMatching(SearchBar.getText()));
+            autoCompletePopup.getSuggestions().addAll(input.demo.prefixMatching(SearchBar.getText().toLowerCase()));
         }
         autoCompletePopup.setSelectionHandler(event -> {
             SearchBar.setText(event.getObject());
@@ -69,14 +69,14 @@ public class SearchCoreController implements Initializable {
     public void onSearchAction(KeyEvent event) {
         autoCompletePopup.hide();
         autoCompletePopup.getSuggestions().clear();
-        autoCompletePopup.getSuggestions().addAll(input.demo.prefixMatching(SearchBar.getText()));
+        autoCompletePopup.getSuggestions().addAll(input.demo.prefixMatching(SearchBar.getText().toLowerCase()));
         autoCompletePopup.show(SearchBar);
     }
 
     public String definition() {
         if (!input.demo.search(SearchBar.getText()))
             return "Word not found";
-        return input.demo_map.get(SearchBar.getText());
+        return input.demo_map.get(SearchBar.getText().toLowerCase());
     }
 
     @FXML
