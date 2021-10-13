@@ -5,7 +5,7 @@ import java.util.*;
 
 public class Dictionary {
     static class Word {
-        String word_explain;
+        String word_explain;gi
         String word_target;
 
         Word (String word_explain, String word_target) {
