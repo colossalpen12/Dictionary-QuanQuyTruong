@@ -15,3 +15,9 @@ I added running configurations in DictionaryApplication.java, so if you have any
 
 Things that left:
 Volume, Text-to-Speech, Add-Remove word from Database.
+
+
+Link for the whole Intellij Project: 
+https://drive.google.com/drive/folders/1Wlv2BlfKRJI6z9j6goylqlQqaF1oK4lm?usp=sharing
+
+if you want to run this app flawlessly, download this one. Github is for code only.
