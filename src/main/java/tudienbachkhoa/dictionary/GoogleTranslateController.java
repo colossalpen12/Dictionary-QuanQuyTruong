@@ -57,6 +57,7 @@ public class GoogleTranslateController implements Initializable {
     public void pressEnter(KeyEvent event) throws IOException{
         if (event.getCode().equals(KeyCode.ENTER)) {
             output.setText(trans());
+            output.requestFocus();
         }
     }
 
