@@ -14,7 +14,7 @@ JFoenix: https://github.com/sshahine/JFoenix (version for Java 9)
 I added running configurations in DictionaryApplication.java, so if you have any problems compiling the project, add these into running configuration.
 
 Things that left:
-Volume, Text-to-Speech, Add-Remove word from Database.
+Volume, Add-Remove word from Database.
 
 
 Link for the whole Intellij Project: 
