@@ -7,6 +7,7 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.effect.Glow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -14,29 +15,18 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1080.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tudienbachkhoa.dictionary.GoogleTranslateController">
     <children>
-        <AnchorPane layoutX="-2.0" prefHeight="163.0" prefWidth="1084.0" style="-fx-background-color: #485460#485460 #485460#485460; -fx-background-radius: 15 15 0 0;">
+        <AnchorPane layoutX="160.0" prefHeight="163.0" prefWidth="453.0" style="-fx-background-color: #485460#485460 #485460#485460;">
             <children>
-                <ImageView fitHeight="91.0" fitWidth="95.0" layoutX="143.0" layoutY="43.0" preserveRatio="true">
+                <ImageView fitHeight="91.0" fitWidth="95.0" layoutX="31.0" layoutY="39.0" preserveRatio="true">
                     <image>
                         <Image url="@/translate.png" />
                     </image>
                 </ImageView>
-                <Label layoutX="254.0" layoutY="64.0" text="Google Translate">
+                <Label layoutX="165.0" layoutY="57.0" text="Google Translate" textFill="#fbfeff">
                     <font>
                         <Font name="Roboto Light" size="49.0" />
                     </font>
                 </Label>
-                <ImageView fitHeight="45.0" fitWidth="43.0" layoutX="4.0" layoutY="5.0" preserveRatio="true">
-                    <image>
-                        <Image url="@/icons8-back-100.png" />
-                    </image>
-                </ImageView>
-                <Label layoutX="34.0" layoutY="19.0" text="Back">
-                    <font>
-                        <Font name="Roboto Light" size="13.0" />
-                    </font>
-                </Label>
-                <Button layoutX="7.0" layoutY="2.0" mnemonicParsing="false" opacity="0.0" prefHeight="44.0" prefWidth="54.0" text="back" />
                 <ImageView fitHeight="34.0" fitWidth="31.0" layoutX="1042.0" layoutY="3.0" preserveRatio="true">
                     <image>
                         <Image url="@/icons8-exit-100.png" />
@@ -73,6 +63,21 @@
             </JFXButton>
             </children>
         </AnchorPane>
-        <Button mnemonicParsing="false" onAction="#switchToMainMenu" opacity="0.0" prefHeight="48.0" prefWidth="54.0" text="back" />
+      <Button alignment="BOTTOM_CENTER" layoutX="-2.0" layoutY="-2.0" mnemonicParsing="false" onAction="#switchToMainMenu" opacity="0.92" prefHeight="163.0" prefWidth="163.0" style="-fx-background-color: #485460#485460 #485460#485460 #485460#485460 #485460#485460; -fx-background-radius: 15 0 0 0;" text="Back" wrapText="true">
+         <font>
+            <Font name="Roboto Light" size="23.0" />
+         </font>
+         <effect>
+            <Glow />
+         </effect>
+         <tooltip>
+            <Tooltip text="Back to main menu" />
+         </tooltip>
+      </Button>
+      <ImageView layoutX="29.0" layoutY="29.0">
+         <image>
+            <Image url="@/icons8-back-100.png" />
+         </image>
+      </ImageView>
     </children>
 </AnchorPane>
