@@ -30,6 +30,7 @@ public class DictionaryApplication extends Application {
 }
 
 /**
+ *
  --add-exports=javafx.base/com.sun.javafx.event=org.controlsfx.control
  --add-exports
  javafx.controls/com.sun.javafx.scene.control.behavior=com.jfoenix

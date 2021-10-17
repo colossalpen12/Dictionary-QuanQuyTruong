@@ -11,12 +11,13 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import org.controlsfx.control.action.Action;
 import org.controlsfx.control.textfield.AutoCompletionBinding;
 
 import java.io.IOException;
@@ -41,6 +42,7 @@ public class SearchCoreController implements Initializable {
     private Dictionary input = new Dictionary();
     private ObservableList<String> dictionaries = FXCollections.observableArrayList("English to English", "English to Vietnamese", "Vietnamese to English");
     AutoCompletionBinding initial;
+    TextToSpeech demo = new TextToSpeech();
 
     private List<String> SearchHistory = null;
 
@@ -72,6 +74,7 @@ public class SearchCoreController implements Initializable {
         autoCompletePopup.getSuggestions().addAll(input.demo.prefixMatching(SearchBar.getText().toLowerCase()));
         autoCompletePopup.show(SearchBar);
     }
+
 
     public String definition() {
         if (!input.demo.search(SearchBar.getText()))
@@ -108,5 +111,34 @@ public class SearchCoreController implements Initializable {
     @FXML
     public void changeDictionary(ActionEvent event) throws IOException {
         input.Retrieve(chooseDictionary.getValue());
+    }
+
+    @FXML
+    public void Pronounce(ActionEvent event) throws IOException {
+        if (!chooseDictionary.getValue().equals("Vietnamese to English") && input.demo.search(SearchBar.getText())) {
+            demo.speak(SearchBar.getText());
+        }
+        else if (!chooseDictionary.getValue().equals("Vietnamese to English") && !input.demo.search(SearchBar.getText())){
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Word not found!!");
+            alert.setHeaderText("Word not found!!");
+            alert.setContentText("We cannot find the word.");
+            alert.showAndWait().ifPresent(rs -> {
+                if (rs == ButtonType.OK) {
+                    System.out.println("Ố kê");
+                }
+            });
+        }
+        else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Unsupported Text-To-Speech occurred!!");
+            alert.setHeaderText("Unsupported language");
+            alert.setContentText("This program doesn't support Vietnamese to English pronunciation.");
+            alert.showAndWait().ifPresent(rs -> {
+                if (rs == ButtonType.OK) {
+                    System.out.println("Ố kê");
+                }
+            });
+        }
     }
 }
