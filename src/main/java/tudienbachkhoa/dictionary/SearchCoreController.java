@@ -21,15 +21,10 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
 import java.net.HttpURLConnection;
-import java.net.InetAddress;
 import java.net.URL;
-
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class SearchCoreController implements Initializable {
 
@@ -67,8 +62,7 @@ public class SearchCoreController implements Initializable {
             , "Vietnamese to English", "Merriam-Webster");
     TextToSpeech Voice = new TextToSpeech();
 
-    private List<String> SearchHistory;
-
+    private List<String> history = new ArrayList<>();
     private final JFXAutoCompletePopup<String> autoCompletePopup = new JFXAutoCompletePopup<>();
 
     @Override
@@ -95,15 +89,29 @@ public class SearchCoreController implements Initializable {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+        try {
+            GetHistory();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         chooseDictionary.getItems().addAll(dictionaries);
         chooseDictionary.setValue("English to English");
         DictionaryInput.Retrieve(chooseDictionary.getValue());
-        if (SearchHistory != null) {
-            autoCompletePopup.getSuggestions().addAll(SearchHistory);
+        if (!history.isEmpty()) {
+            autoCompletePopup.getSuggestions().addAll(history);
+            SearchBar.setOnMouseClicked(clickEvent -> {
+                autoCompletePopup.show(SearchBar);
+            });
         } else {
             autoCompletePopup.getSuggestions().addAll(DictionaryInput.ListOfWord.prefixMatching(SearchBar.getText().toLowerCase()));
         }
         autoCompletePopup.setSelectionHandler(event -> {
+            try {
+                if (!history.contains(event.getObject()))
+                    SaveHistory(event.getObject());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             SearchBar.setText(event.getObject());
             definition.setText(definition());
             definition.requestFocus();
@@ -130,11 +138,9 @@ public class SearchCoreController implements Initializable {
     public String definition() {
         if (chooseDictionary.getValue().equals("Merriam-Webster")) {
             return WebScraping.getDescription(SearchBar.getText());
-        } else {
-            if (!DictionaryInput.ListOfWord.search(SearchBar.getText()))
-                return "Word not found";
-            return DictionaryInput.WordMap.get(SearchBar.getText().toLowerCase());
-        }
+        } else if (!DictionaryInput.ListOfWord.search(SearchBar.getText()))
+            return "Word not found";
+        return DictionaryInput.WordMap.get(SearchBar.getText().toLowerCase());
     }
 
     @FXML
@@ -242,5 +248,29 @@ public class SearchCoreController implements Initializable {
             return false;
         }
         return true;
+    }
+
+    private void SaveHistory(String word) throws IOException {
+        Writer output;
+        output = new BufferedWriter(new FileWriter("src/main/resources/history.txt", true));
+        output.append(word + "\n");
+        output.close();
+    }
+
+    private void GetHistory() throws IOException {
+        BufferedReader reader = new BufferedReader(new FileReader("src/main/resources/history.txt"));
+        String word;
+        while ((word = reader.readLine()) != null) {
+            history.add(word);
+        }
+        Collections.reverse(history);
+    }
+
+    @FXML
+    public void clearSearchHistory() throws IOException {
+        autoCompletePopup.getSuggestions().clear();
+        Writer output;
+        output = new BufferedWriter(new FileWriter("src/main/resources/history.txt"));
+        output.close();
     }
 }

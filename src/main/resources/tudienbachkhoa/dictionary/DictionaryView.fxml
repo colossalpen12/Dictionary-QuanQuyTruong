@@ -51,6 +51,11 @@
                </font>
             </Label>
             <JFXButton fx:id="BackButton" layoutY="10.0" onAction="#switchToMainMenu" text="Back" />
+            <JFXButton layoutX="27.0" layoutY="563.0" onAction="#clearSearchHistory" text="Clear Search History" textFill="WHITE">
+               <font>
+                  <Font name="Roboto Light" size="13.0" />
+               </font>
+            </JFXButton>
             </children>
         </AnchorPane>
     </children>
