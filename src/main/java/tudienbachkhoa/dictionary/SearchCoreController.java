@@ -194,7 +194,7 @@ public class SearchCoreController implements Initializable {
     @FXML
     public void changeDictionary(ActionEvent event) throws IOException {
         if (chooseDictionary.getValue().equals("Merriam-Webster")) {
-            if (isInternetReachable() == false){
+            if (isInternetReachable() == false) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("An internet connection error occurred!");
                 alert.setHeaderText("Application cannot connect to Merriam-Webster!");
@@ -212,18 +212,8 @@ public class SearchCoreController implements Initializable {
 
     @FXML
     public void Pronounce(ActionEvent event) throws IOException {
-        if (!chooseDictionary.getValue().equals("Vietnamese to English") && DictionaryInput.ListOfWord.search(SearchBar.getText())) {
+        if (!chooseDictionary.getValue().equals("Vietnamese to English")) {
             Voice.speak(SearchBar.getText());
-        } else if (!chooseDictionary.getValue().equals("Vietnamese to English") && !DictionaryInput.ListOfWord.search(SearchBar.getText())) {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Word not found!!");
-            alert.setHeaderText("Word not found!!");
-            alert.setContentText("We cannot find the word.");
-            alert.showAndWait().ifPresent(rs -> {
-                if (rs == ButtonType.OK) {
-                    System.out.println("Ố kê");
-                }
-            });
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Unsupported Text-To-Speech occurred!!");
@@ -238,15 +228,14 @@ public class SearchCoreController implements Initializable {
     }
 
     @FXML
-    public void ChangeVolume(MouseEvent event){
+    public void ChangeVolume(MouseEvent event) {
         Voice.SetVolume((float) volumeSlider.getValue());
     }
 
-    public static boolean isInternetReachable()
-    {
+    public static boolean isInternetReachable() {
         try {
             URL url = new URL("https://www.merriam-webster.com/");
-            HttpURLConnection urlConnect = (HttpURLConnection)url.openConnection();
+            HttpURLConnection urlConnect = (HttpURLConnection) url.openConnection();
             Object objData = urlConnect.getContent();
         } catch (Exception e) {
             System.out.println("Cannot connect to the online Dictionary (Merriam-Webster)");
