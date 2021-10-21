@@ -57,5 +57,6 @@
     <orderEntry type="library" name="jsapi" level="project" />
     <orderEntry type="library" name="freetts" level="project" />
     <orderEntry type="library" name="cmu_time_awb" level="project" />
+    <orderEntry type="library" name="jsoup-1.14.3" level="project" />
   </component>
 </module>

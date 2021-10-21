@@ -3,6 +3,7 @@ package tudienbachkhoa.dictionary;
 import com.jfoenix.controls.JFXButton;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -11,6 +12,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
@@ -73,21 +75,17 @@ public class SceneController implements Initializable {
 
     /** All about switching scenes. **/
     @FXML
-    public void switchToSettings(ActionEvent e) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("OptionsView.fxml"));
-        scene = new Scene(root);
-        scene.setFill(Color.TRANSPARENT);
-        stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
-        stage.setScene(scene);
-        stage.show();
-    }
-
-    @FXML
     public void OpenDictionary(ActionEvent e) throws IOException{
         Parent root = FXMLLoader.load(getClass().getResource("DictionaryView.fxml"));
         scene = new Scene(root);
         scene.setFill(Color.TRANSPARENT);
         stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+        root.setOnMousePressed(pressEvent -> {
+            root.setOnMouseDragged(dragEvent -> {
+                stage.setX(dragEvent.getScreenX() - pressEvent.getSceneX());
+                stage.setY(dragEvent.getScreenY() - pressEvent.getSceneY());
+            });
+        });
         stage.setScene(scene);
         stage.show();
     }
@@ -107,6 +105,12 @@ public class SceneController implements Initializable {
         scene = new Scene(root);
         scene.setFill(Color.TRANSPARENT);
         stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+        root.setOnMousePressed(pressEvent -> {
+            root.setOnMouseDragged(dragEvent -> {
+                stage.setX(dragEvent.getScreenX() - pressEvent.getSceneX());
+                stage.setY(dragEvent.getScreenY() - pressEvent.getSceneY());
+            });
+        });
         stage.setScene(scene);
         stage.show();
     }

@@ -2,8 +2,7 @@ package tudienbachkhoa.dictionary;
 
 import com.jfoenix.controls.JFXAutoCompletePopup;
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXListView;
-import com.jfoenix.controls.JFXTextArea;
+import com.jfoenix.controls.JFXSlider;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -18,12 +17,15 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.InetAddress;
 import java.net.URL;
 
 import java.util.List;
@@ -31,6 +33,8 @@ import java.util.ResourceBundle;
 
 public class SearchCoreController implements Initializable {
 
+    @FXML
+    private JFXButton BackButton = new JFXButton();
     @FXML
     private JFXButton addWordButton = new JFXButton();
     @FXML
@@ -47,6 +51,9 @@ public class SearchCoreController implements Initializable {
     @FXML
     private TextArea definition;
 
+    @FXML
+    private JFXSlider volumeSlider = new JFXSlider();
+
     Stage editDatabase = new Stage();
 
     private String meaning = null;
@@ -58,7 +65,7 @@ public class SearchCoreController implements Initializable {
 
     private final ObservableList<String> dictionaries = FXCollections.observableArrayList("English to English", "English to Vietnamese"
             , "Vietnamese to English", "Merriam-Webster");
-    TextToSpeech demo = new TextToSpeech();
+    TextToSpeech Voice = new TextToSpeech();
 
     private List<String> SearchHistory;
 
@@ -68,6 +75,11 @@ public class SearchCoreController implements Initializable {
     /** initialize choice box and text field value. **/
     public void initialize(URL url, ResourceBundle rb) {
         try {
+            volumeSlider.setValue(75);
+            ImageView BackIcon = new ImageView(new Image(new FileInputStream("src/images/icons8-back-100.png")));
+            BackIcon.preserveRatioProperty().set(true);
+            BackIcon.fitHeightProperty().bind(exitButton.widthProperty());
+            BackButton.setGraphic(BackIcon);
             ImageView addIcon = new ImageView(new Image(new FileInputStream("src/images/icons8-plus-+-150.png")));
             ImageView pronounceIcon = new ImageView(new Image(new FileInputStream("src/images/icons8-speaker-100.png")));
             ImageView exitIcon = new ImageView(new Image(new FileInputStream("src/images/icons8-exit-100.png")));
@@ -102,7 +114,10 @@ public class SearchCoreController implements Initializable {
     @FXML //update autocomplete bar sau mỗi kí tự nhập
     public void onSearchAction(KeyEvent event) {
         if (chooseDictionary.getValue().equals("Merriam-Webster")) {
-
+            autoCompletePopup.hide();
+            autoCompletePopup.getSuggestions().clear();
+            autoCompletePopup.getSuggestions().addAll(WebScraping.getSuggestion(SearchBar.getText()));
+            autoCompletePopup.show(SearchBar);
         } else {
             autoCompletePopup.hide();
             autoCompletePopup.getSuggestions().clear();
@@ -114,7 +129,7 @@ public class SearchCoreController implements Initializable {
 
     public String definition() {
         if (chooseDictionary.getValue().equals("Merriam-Webster")) {
-            return "something";
+            return WebScraping.getDescription(SearchBar.getText());
         } else {
             if (!DictionaryInput.ListOfWord.search(SearchBar.getText()))
                 return "Word not found";
@@ -139,6 +154,12 @@ public class SearchCoreController implements Initializable {
         Scene scene = new Scene(root);
         scene.setFill(Color.TRANSPARENT);
         Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+        root.setOnMousePressed(pressEvent -> {
+            root.setOnMouseDragged(dragEvent -> {
+                stage.setX(dragEvent.getScreenX() - pressEvent.getSceneX());
+                stage.setY(dragEvent.getScreenY() - pressEvent.getSceneY());
+            });
+        });
         stage.setScene(scene);
         stage.show();
     }
@@ -173,7 +194,17 @@ public class SearchCoreController implements Initializable {
     @FXML
     public void changeDictionary(ActionEvent event) throws IOException {
         if (chooseDictionary.getValue().equals("Merriam-Webster")) {
-
+            if (isInternetReachable() == false){
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("An internet connection error occurred!");
+                alert.setHeaderText("Application cannot connect to Merriam-Webster!");
+                alert.setContentText("Please check your internet connection!");
+                alert.showAndWait().ifPresent(rs -> {
+                    if (rs == ButtonType.OK) {
+                        System.out.println("Ố kê");
+                    }
+                });
+            }
         } else {
             DictionaryInput.Retrieve(chooseDictionary.getValue());
         }
@@ -182,7 +213,7 @@ public class SearchCoreController implements Initializable {
     @FXML
     public void Pronounce(ActionEvent event) throws IOException {
         if (!chooseDictionary.getValue().equals("Vietnamese to English") && DictionaryInput.ListOfWord.search(SearchBar.getText())) {
-            demo.speak(SearchBar.getText());
+            Voice.speak(SearchBar.getText());
         } else if (!chooseDictionary.getValue().equals("Vietnamese to English") && !DictionaryInput.ListOfWord.search(SearchBar.getText())) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Word not found!!");
@@ -204,5 +235,23 @@ public class SearchCoreController implements Initializable {
                 }
             });
         }
+    }
+
+    @FXML
+    public void ChangeVolume(MouseEvent event){
+        Voice.SetVolume((float) volumeSlider.getValue());
+    }
+
+    public static boolean isInternetReachable()
+    {
+        try {
+            URL url = new URL("https://www.merriam-webster.com/");
+            HttpURLConnection urlConnect = (HttpURLConnection)url.openConnection();
+            Object objData = urlConnect.getContent();
+        } catch (Exception e) {
+            System.out.println("Cannot connect to the online Dictionary (Merriam-Webster)");
+            return false;
+        }
+        return true;
     }
 }

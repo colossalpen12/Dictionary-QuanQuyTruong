@@ -82,6 +82,12 @@ public class GoogleTranslateController implements Initializable {
         Scene scene = new Scene(root);
         scene.setFill(Color.TRANSPARENT);
         Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+        root.setOnMousePressed(pressEvent -> {
+            root.setOnMouseDragged(dragEvent -> {
+                stage.setX(dragEvent.getScreenX() - pressEvent.getSceneX());
+                stage.setY(dragEvent.getScreenY() - pressEvent.getSceneY());
+            });
+        });
         stage.setScene(scene);
         stage.show();
     }

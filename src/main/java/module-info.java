@@ -13,6 +13,8 @@ module tudienbachkhoa.dictionary {
     requires java.sql;
     requires com.jfoenix;
     requires jsapi;
+    requires org.jsoup;
+    requires freetts;
 
     opens tudienbachkhoa.dictionary to javafx.fxml;
     exports tudienbachkhoa.dictionary;

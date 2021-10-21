@@ -5,31 +5,26 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1080.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tudienbachkhoa.dictionary.SceneController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="860.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tudienbachkhoa.dictionary.SceneController">
     <children>
-        <AnchorPane layoutX="-1.0" layoutY="-1.0" opacity="0.8" prefHeight="602.0" prefWidth="1082.0" style="-fx-background-color: #485460#485460; -fx-border-radius: 15; -fx-background-radius: 15;">
+        <AnchorPane opacity="0.8" prefHeight="600.0" prefWidth="860.0" style="-fx-background-color: #485460#485460; -fx-border-radius: 15; -fx-background-radius: 15;">
             <children>
-                <JFXButton fx:id="exitButton" layoutX="1046.0" layoutY="7.0" maxHeight="32.0" maxWidth="32.0" minHeight="20.0" minWidth="20.0" onAction="#ExitApp" prefHeight="30.0" prefWidth="30.0">
+                <JFXButton fx:id="exitButton" layoutX="828.0" layoutY="8.0" maxHeight="32.0" maxWidth="32.0" minHeight="20.0" minWidth="20.0" onAction="#ExitApp" prefHeight="30.0" prefWidth="30.0">
                     <tooltip>
                         <Tooltip text="Exit app" />
                     </tooltip>
                 </JFXButton>
-                <JFXButton fx:id="aboutButton" layoutX="1010.0" layoutY="7.0" maxHeight="32.0" maxWidth="32.0" minHeight="20.0" minWidth="20.0" onAction="#openAbout" prefHeight="30.0" prefWidth="30.0">
+                <JFXButton fx:id="aboutButton" layoutX="775.0" layoutY="9.0" maxHeight="32.0" maxWidth="32.0" minHeight="20.0" minWidth="20.0" onAction="#openAbout" prefHeight="30.0" prefWidth="30.0" text="Button">
                     <tooltip>
                         <Tooltip text="About the app" />
                     </tooltip>
                 </JFXButton>
-            <JFXButton fx:id="DictionaryButton" layoutX="20.0" layoutY="188.0" maxHeight="235.0" maxWidth="320.0" minHeight="235.0" minWidth="320.0" onAction="#OpenDictionary" prefHeight="235.0" prefWidth="320.0" style="-fx-background-color: #4bcffa#4bcffa #4bcffa#4bcffa; -fx-background-radius: 15 50;" text="Dictionary">
+            <JFXButton fx:id="DictionaryButton" layoutX="74.0" layoutY="193.0" maxHeight="235.0" maxWidth="320.0" minHeight="235.0" minWidth="320.0" onAction="#OpenDictionary" prefHeight="235.0" prefWidth="320.0" style="-fx-background-color: #4bcffa#4bcffa #4bcffa#4bcffa; -fx-background-radius: 15 50;" text="Dictionary">
                <font>
                   <Font name="Raleway ExtraLight" size="31.0" />
                </font>
             </JFXButton>
-            <JFXButton fx:id="GoogleTranslateButton" layoutX="380.0" layoutY="188.0" maxHeight="235.0" maxWidth="320.0" minHeight="235.0" minWidth="320.0" onAction="#switchToGoogleTranslate" prefHeight="235.0" prefWidth="320.0" style="-fx-background-color: #4bcffa#4bcffa #4bcffa#4bcffa; -fx-background-radius: 15 50;" text="Google Translate" textAlignment="CENTER" wrapText="true">
-               <font>
-                  <Font name="Raleway ExtraLight" size="31.0" />
-               </font>
-            </JFXButton>
-            <JFXButton fx:id="SettingsButton" layoutX="740.0" layoutY="188.0" maxHeight="235.0" maxWidth="320.0" minHeight="235.0" minWidth="320.0" onAction="#switchToSettings" prefHeight="235.0" prefWidth="320.0" style="-fx-background-color: #4bcffa#4bcffa #4bcffa#4bcffa; -fx-background-radius: 15 50;" text="Settings">
+            <JFXButton fx:id="GoogleTranslateButton" layoutX="467.0" layoutY="193.0" maxHeight="235.0" maxWidth="320.0" minHeight="235.0" minWidth="320.0" onAction="#switchToGoogleTranslate" prefHeight="235.0" prefWidth="320.0" style="-fx-background-color: #4bcffa#4bcffa #4bcffa#4bcffa; -fx-background-radius: 15 50;" text="Google Translate" textAlignment="CENTER" wrapText="true">
                <font>
                   <Font name="Raleway ExtraLight" size="31.0" />
                </font>

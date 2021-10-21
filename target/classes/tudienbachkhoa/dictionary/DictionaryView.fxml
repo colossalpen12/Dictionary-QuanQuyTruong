@@ -1,15 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXSlider?>
 <?import com.jfoenix.controls.JFXTextArea?>
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.Tooltip?>
-<?import javafx.scene.effect.Glow?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
@@ -17,11 +14,6 @@
     <children>
         <AnchorPane layoutX="-1.0" layoutY="-1.0" opacity="0.9" prefHeight="602.0" prefWidth="741.0" style="-fx-background-color: #485460#485460; -fx-background-radius: 15; -fx-border-radius: 15;">
             <children>
-                <ImageView fitHeight="35.0" fitWidth="32.0" layoutX="1.0" layoutY="8.0" preserveRatio="true">
-                    <image>
-                        <Image url="@/icons8-back-100.png" />
-                    </image>
-                </ImageView>
                 <ChoiceBox fx:id="chooseDictionary" layoutX="14.0" layoutY="56.0" onAction="#changeDictionary" prefHeight="31.0" prefWidth="128.0" style="-fx-border-radius: 15; -fx-background-radius: 15; -fx-background-color: #fbfeff;">
                     <tooltip>
                         <Tooltip text="Choose your dictionary" />
@@ -36,22 +28,6 @@
                         </TextField>
                     </children>
                 </AnchorPane>
-                <Label layoutX="29.0" layoutY="16.0" text="Back" wrapText="true">
-                    <font>
-                        <Font name="Roboto" size="13.0" />
-                    </font>
-                </Label>
-                <Button layoutX="5.0" layoutY="-1.0" mnemonicParsing="false" onAction="#switchToMainMenu" opacity="0.0" prefHeight="48.0" prefWidth="68.0" text="back">
-                    <font>
-                        <Font name="Roboto Black" size="13.0" />
-                    </font>
-                    <effect>
-                        <Glow level="1.0" />
-                    </effect>
-                    <tooltip>
-                        <Tooltip text="Back to main menu" />
-                    </tooltip>
-                </Button>
                 <JFXTextArea fx:id="definition" editable="false" layoutX="148.0" layoutY="162.0" prefHeight="258.0" prefWidth="421.0" style="-fx-background-color: #fbfeff; -fx-background-radius: 15; -fx-border-radius: 15;" wrapText="true">
                     <font>
                         <Font name="Roboto" size="20.0" />
@@ -68,6 +44,13 @@
                 <JFXButton fx:id="exitButton" layoutX="694.0" layoutY="10.0" maxHeight="32.0" maxWidth="32.0" minHeight="20.0" minWidth="20.0" onAction="#ExitApp" prefHeight="30.0" prefWidth="32.0">
                 <tooltip><Tooltip text="Exit app" /></tooltip>
                 </JFXButton>
+            <JFXSlider fx:id="volumeSlider" layoutX="517.0" layoutY="564.0" onDragDetected="#ChangeVolume" onDragDone="#ChangeVolume" onMouseClicked="#ChangeVolume" prefHeight="28.0" prefWidth="207.0" />
+            <Label layoutX="430.0" layoutY="569.0" text="Voice Volume:" textFill="WHITE">
+               <font>
+                  <Font name="Roboto Light" size="13.0" />
+               </font>
+            </Label>
+            <JFXButton fx:id="BackButton" layoutY="10.0" onAction="#switchToMainMenu" text="Back" />
             </children>
         </AnchorPane>
     </children>
