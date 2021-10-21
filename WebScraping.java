@@ -28,12 +28,12 @@ public class WebScraping {
         return descriptions.toString();
     }
 
-    public List<String> getSuggestion(String word) {
-        String url = "https://www.niftyword.com/prefix-suffix-derived/";
+   public List<String> getSuggestion(String word) {
+        String url = "https://wordfind.com/starts-with/app/";
         List<String> Suggestions = new ArrayList<>();
         try {
-            Document doc = Jsoup.connect(url+word+'/').get();
-            Elements suggestions = doc.select("ul li div h4");
+            Document doc = Jsoup.connect(url).get();
+            Elements suggestions = doc.select("section div ul li a");
             for (Element element : suggestions) {
                 Suggestions.add(element.text());
             }
