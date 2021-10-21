@@ -29,10 +29,10 @@ public class WebScraping {
     }
 
    public List<String> getSuggestion(String word) {
-        String url = "https://wordfind.com/starts-with/app/";
+        String url = "https://wordfind.com/starts-with/";
         List<String> Suggestions = new ArrayList<>();
         try {
-            Document doc = Jsoup.connect(url).get();
+            Document doc = Jsoup.connect(url+wor+'/').get();
             Elements suggestions = doc.select("section div ul li a");
             for (Element element : suggestions) {
                 Suggestions.add(element.text());
