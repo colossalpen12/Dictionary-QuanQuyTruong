@@ -47,7 +47,7 @@ public class EditDatabaseController implements Initializable {
             SelectedWord = newValue;
             edit.setText(DictionaryInput.WordMap.get(SelectedWord));
             applyButton.disableProperty().set(true);
-            edit.requestFocus();
+            //edit.requestFocus();
             edit.textProperty().addListener((observableValue, s, s2) -> {
                 if (s2 != s) {
                     applyButton.disableProperty().set(false);
@@ -66,7 +66,7 @@ public class EditDatabaseController implements Initializable {
     @FXML
     public void edit_PressEnter(ActionEvent event) {
         edit.setText(edit_definition());
-        edit.requestFocus();
+       // edit.requestFocus();
     }
 
     @FXML

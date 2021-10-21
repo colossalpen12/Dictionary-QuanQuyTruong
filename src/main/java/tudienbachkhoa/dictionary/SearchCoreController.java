@@ -51,10 +51,13 @@ public class SearchCoreController implements Initializable {
 
     private String meaning = null;
 
-    /** initialize the Dictionary **/
+    /**
+     * initialize the Dictionary
+     **/
     private Dictionary DictionaryInput = new Dictionary();
 
-    private final ObservableList<String> dictionaries = FXCollections.observableArrayList("English to English", "English to Vietnamese", "Vietnamese to English");
+    private final ObservableList<String> dictionaries = FXCollections.observableArrayList("English to English", "English to Vietnamese"
+            , "Vietnamese to English", "Merriam-Webster");
     TextToSpeech demo = new TextToSpeech();
 
     private List<String> SearchHistory;
@@ -98,17 +101,25 @@ public class SearchCoreController implements Initializable {
 
     @FXML //update autocomplete bar sau mỗi kí tự nhập
     public void onSearchAction(KeyEvent event) {
-        autoCompletePopup.hide();
-        autoCompletePopup.getSuggestions().clear();
-        autoCompletePopup.getSuggestions().addAll(DictionaryInput.ListOfWord.prefixMatching(SearchBar.getText().toLowerCase()));
-        autoCompletePopup.show(SearchBar);
+        if (chooseDictionary.getValue().equals("Merriam-Webster")) {
+
+        } else {
+            autoCompletePopup.hide();
+            autoCompletePopup.getSuggestions().clear();
+            autoCompletePopup.getSuggestions().addAll(DictionaryInput.ListOfWord.prefixMatching(SearchBar.getText().toLowerCase()));
+            autoCompletePopup.show(SearchBar);
+        }
     }
 
 
     public String definition() {
-        if (!DictionaryInput.ListOfWord.search(SearchBar.getText()))
-            return "Word not found";
-        return DictionaryInput.WordMap.get(SearchBar.getText().toLowerCase());
+        if (chooseDictionary.getValue().equals("Merriam-Webster")) {
+            return "something";
+        } else {
+            if (!DictionaryInput.ListOfWord.search(SearchBar.getText()))
+                return "Word not found";
+            return DictionaryInput.WordMap.get(SearchBar.getText().toLowerCase());
+        }
     }
 
     @FXML
@@ -134,13 +145,24 @@ public class SearchCoreController implements Initializable {
 
     @FXML
     public void openAddWord(ActionEvent e) throws IOException {
-        EditDatabaseController.dictionary = chooseDictionary.getValue();
-        Parent root = FXMLLoader.load(getClass().getResource("addWord.fxml"));
-        Scene abt = new Scene(root);
-        abt.setFill(Color.TRANSPARENT);
-        editDatabase.setTitle("Add/Remove or Edit database");
-        editDatabase.setScene(abt);
-        editDatabase.show();
+        if (chooseDictionary.getValue().equals("Merriam-Webster")) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Unsupported feature!");
+            alert.setHeaderText("Merriam-Webster Dictionary does not support database interference.");
+            alert.showAndWait().ifPresent(rs -> {
+                if (rs == ButtonType.OK) {
+                    System.out.println("Ố kê");
+                }
+            });
+        } else {
+            EditDatabaseController.dictionary = chooseDictionary.getValue();
+            Parent root = FXMLLoader.load(getClass().getResource("addWord.fxml"));
+            Scene abt = new Scene(root);
+            abt.setFill(Color.TRANSPARENT);
+            editDatabase.setTitle("Add/Remove or Edit database");
+            editDatabase.setScene(abt);
+            editDatabase.show();
+        }
     }
 
     @FXML
@@ -150,7 +172,11 @@ public class SearchCoreController implements Initializable {
 
     @FXML
     public void changeDictionary(ActionEvent event) throws IOException {
-        DictionaryInput.Retrieve(chooseDictionary.getValue());
+        if (chooseDictionary.getValue().equals("Merriam-Webster")) {
+
+        } else {
+            DictionaryInput.Retrieve(chooseDictionary.getValue());
+        }
     }
 
     @FXML
