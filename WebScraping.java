@@ -32,7 +32,7 @@ public class WebScraping {
         String url = "https://wordfind.com/starts-with/";
         List<String> Suggestions = new ArrayList<>();
         try {
-            Document doc = Jsoup.connect(url+wor+'/').get();
+            Document doc = Jsoup.connect(url+word+'/').get();
             Elements suggestions = doc.select("section div ul li a");
             for (Element element : suggestions) {
                 Suggestions.add(element.text());
