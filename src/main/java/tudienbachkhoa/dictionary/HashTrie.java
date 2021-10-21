@@ -52,9 +52,6 @@ public class HashTrie {
         if (root.children.isEmpty())
             return;
         for (Node child : root.children.values()) {
-            if (list.size() >= 10) {
-                return;
-            }
             prefixSearch(child, list, curr.append(child.c));
             curr.setLength(curr.length()-1);
         }

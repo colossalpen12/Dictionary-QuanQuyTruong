@@ -1,80 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.effect.Bloom?>
-<?import javafx.scene.effect.Glow?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1080.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tudienbachkhoa.dictionary.SceneController">
-   <children>
-      <AnchorPane layoutX="-1.0" layoutY="-1.0" opacity="0.85" prefHeight="602.0" prefWidth="1082.0" style="-fx-background-color: #485460#485460; -fx-border-radius: 15; -fx-background-radius: 15;">
-         <children>
-            <ImageView fitHeight="34.0" fitWidth="29.0" layoutX="1046.0" layoutY="7.0" opacity="0.84" preserveRatio="true">
-               <image>
-                  <Image url="@/icons8-exit-100.png" />
-               </image>
-               <effect>
-                  <Glow level="0.46" />
-               </effect>
-            </ImageView>
-            <Button layoutX="1043.0" layoutY="2.0" mnemonicParsing="false" onAction="#ExitApp" opacity="0.0" prefHeight="34.0" prefWidth="38.0" text="Button" />
-            <ImageView fitHeight="28.0" fitWidth="29.0" layoutX="1010.0" layoutY="2.0" preserveRatio="true">
-               <image>
-                  <Image url="@/icons8-about-384.png" />
-               </image>
-               <effect>
-                  <Bloom threshold="0.48" />
-               </effect>
-            </ImageView>
-            <Button fx:id="aboutButton" layoutX="1000.0" layoutY="2.0" mnemonicParsing="false" onAction="#openAbout" opacity="0.0" prefHeight="34.0" prefWidth="36.0" text="about" />
-         </children></AnchorPane>
-      <AnchorPane id="dictionary-opening" layoutX="380.0" layoutY="188.0" opacity="0.7" prefHeight="235.0" prefWidth="320.0" style="-fx-background-color: #4bcffa#4bcffa; -fx-background-radius: 15 50; -fx-border-radius: 15 50;">
-         <children>
-            <ImageView fitHeight="83.0" fitWidth="74.0" layoutX="126.0" layoutY="80.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@/translate.png" />
-               </image>
-            </ImageView>
-            <Text layoutX="42.0" layoutY="195.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Google Translate" textAlignment="CENTER">
+    <children>
+        <AnchorPane layoutX="-1.0" layoutY="-1.0" opacity="0.8" prefHeight="602.0" prefWidth="1082.0" style="-fx-background-color: #485460#485460; -fx-border-radius: 15; -fx-background-radius: 15;">
+            <children>
+                <JFXButton fx:id="exitButton" layoutX="1046.0" layoutY="7.0" maxHeight="32.0" maxWidth="32.0" minHeight="20.0" minWidth="20.0" onAction="#ExitApp" prefHeight="30.0" prefWidth="30.0">
+                    <tooltip>
+                        <Tooltip text="Exit app" />
+                    </tooltip>
+                </JFXButton>
+                <JFXButton fx:id="aboutButton" layoutX="1010.0" layoutY="7.0" maxHeight="32.0" maxWidth="32.0" minHeight="20.0" minWidth="20.0" onAction="#openAbout" prefHeight="30.0" prefWidth="30.0">
+                    <tooltip>
+                        <Tooltip text="About the app" />
+                    </tooltip>
+                </JFXButton>
+            <JFXButton fx:id="DictionaryButton" layoutX="20.0" layoutY="188.0" maxHeight="235.0" maxWidth="320.0" minHeight="235.0" minWidth="320.0" onAction="#OpenDictionary" prefHeight="235.0" prefWidth="320.0" style="-fx-background-color: #4bcffa#4bcffa #4bcffa#4bcffa; -fx-background-radius: 15 50;" text="Dictionary">
                <font>
                   <Font name="Raleway ExtraLight" size="31.0" />
                </font>
-            </Text>
-            <Button layoutX="1.0" layoutY="2.0" mnemonicParsing="false" onAction="#switchToGoogleTranslate" opacity="0.0" prefHeight="236.0" prefWidth="318.0" text="ggltranslate" />
-         </children></AnchorPane>
-      <AnchorPane id="dictionary-opening" layoutX="41.0" layoutY="188.0" opacity="0.7" prefHeight="235.0" prefWidth="320.0" style="-fx-background-color: #4bcffa#4bcffa; -fx-background-radius: 15 50; -fx-border-radius: 15 50;">
-         <children>
-            <ImageView fitHeight="83.0" fitWidth="74.0" layoutX="124.0" layoutY="75.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@/dictionary.png" />
-               </image>
-            </ImageView>
-            <Text layoutX="91.0" layoutY="196.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dictionary" textAlignment="CENTER">
+            </JFXButton>
+            <JFXButton fx:id="GoogleTranslateButton" layoutX="380.0" layoutY="188.0" maxHeight="235.0" maxWidth="320.0" minHeight="235.0" minWidth="320.0" onAction="#switchToGoogleTranslate" prefHeight="235.0" prefWidth="320.0" style="-fx-background-color: #4bcffa#4bcffa #4bcffa#4bcffa; -fx-background-radius: 15 50;" text="Google Translate" textAlignment="CENTER" wrapText="true">
                <font>
                   <Font name="Raleway ExtraLight" size="31.0" />
                </font>
-            </Text>
-            <Button layoutX="4.0" layoutY="4.0" mnemonicParsing="false" onAction="#OpenDictionary" opacity="0.0" prefHeight="228.0" prefWidth="313.0" text="settings" />
-         </children>
-      </AnchorPane>
-      <AnchorPane id="dictionary-opening" layoutX="719.0" layoutY="188.0" opacity="0.7" prefHeight="235.0" prefWidth="320.0" style="-fx-background-color: #4bcffa#4bcffa; -fx-background-radius: 15 50; -fx-border-radius: 15 50;">
-         <children>
-            <ImageView fitHeight="81.0" fitWidth="74.0" layoutX="120.0" layoutY="77.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@/settings.png" />
-               </image>
-            </ImageView>
-            <Text layoutX="106.0" layoutY="194.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Settings" textAlignment="CENTER">
+            </JFXButton>
+            <JFXButton fx:id="SettingsButton" layoutX="740.0" layoutY="188.0" maxHeight="235.0" maxWidth="320.0" minHeight="235.0" minWidth="320.0" onAction="#switchToSettings" prefHeight="235.0" prefWidth="320.0" style="-fx-background-color: #4bcffa#4bcffa #4bcffa#4bcffa; -fx-background-radius: 15 50;" text="Settings">
                <font>
                   <Font name="Raleway ExtraLight" size="31.0" />
                </font>
-            </Text>
-            <Button layoutX="1.0" layoutY="4.0" mnemonicParsing="false" onAction="#switchToSettings" opacity="0.0" prefHeight="228.0" prefWidth="313.0" text="settings" />
-         </children>
-      </AnchorPane>
-   </children>
+            </JFXButton>
+            </children>
+        </AnchorPane>
+    </children>
 </AnchorPane>

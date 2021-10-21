@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXSlider?>
 <?import com.jfoenix.controls.JFXToggleButton?>
 <?import com.jfoenix.controls.JFXToolbar?>
@@ -14,15 +15,6 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1082.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tudienbachkhoa.dictionary.SettingsController">
    <children>
-      <Button alignment="BOTTOM_CENTER" layoutY="-3.0" mnemonicParsing="false" onAction="#switchToMainMenu" opacity="0.92" prefHeight="151.0" prefWidth="141.0" style="-fx-background-color: #485460#485460 #485460#485460 #485460#485460 #485460#485460; -fx-background-radius: 15 0 0 0;" text="Back" wrapText="true">
-         <font>
-            <Font name="Roboto Light" size="23.0" />
-         </font>
-         <effect>
-            <Glow />
-         </effect>
-         <tooltip><Tooltip text="Back to main menu" /></tooltip>
-      </Button>
       <AnchorPane layoutY="148.0" opacity="0.85" prefHeight="454.0" prefWidth="1082.0" style="-fx-background-color: #485460#485460 #485460#485460; -fx-border-radius: 0 0 15 15; -fx-background-radius: 0 0 15 15;">
          <children>
             <JFXToggleButton layoutX="139.0" layoutY="56.0" prefHeight="167.0" prefWidth="451.0" size="30.0" style="-fx-background-color: transparent;" text="Using online database" textFill="WHITE" wrapText="true">
@@ -31,7 +23,7 @@
                </font>
             </JFXToggleButton>
             <JFXToolbar layoutX="278.0" layoutY="298.0" prefWidth="112.0" />
-            <JFXSlider blockIncrement="1.0" layoutX="311.0" layoutY="224.0" prefHeight="44.0" prefWidth="262.0">
+            <JFXSlider fx:id="volume" blockIncrement="1.0" layoutX="311.0" layoutY="224.0" onMouseClicked="#changeVolume" prefHeight="44.0" prefWidth="262.0">
                <effect>
                   <Glow />
                </effect>
@@ -49,25 +41,23 @@
                   <Font name="Raleway ExtraLight" size="71.0" />
                </font>
             </Label>
-            <ImageView fitHeight="34.0" fitWidth="29.0" layoutX="908.0" layoutY="5.0" onMouseClicked="#ExitApp" preserveRatio="true">
-               <image>
-                  <Image url="@/icons8-exit-100.png" />
-               </image>
-               <effect>
-                  <Glow level="0.46" />
-               </effect>
-            </ImageView>
-            <Button layoutX="880.0" layoutY="2.0" mnemonicParsing="false" onAction="#ExitApp" opacity="0.0" prefHeight="42.0" prefWidth="59.0" text="Button" />
+            <JFXButton fx:id="exitButton" layoutX="909.0" layoutY="10.0" maxHeight="32.0" maxWidth="32.0" minHeight="20.0" minWidth="20.0" onAction="#ExitApp" prefHeight="30.0" prefWidth="30.0" />
          </children>
       </AnchorPane>
+      <Button alignment="BOTTOM_CENTER" layoutX="-1.0" layoutY="-4.0" mnemonicParsing="false" onAction="#switchToMainMenu" opacity="0.92" prefHeight="151.0" prefWidth="141.0" style="-fx-background-color: #485460#485460 #485460#485460 #485460#485460 #485460#485460; -fx-background-radius: 15 0 0 0;" text="Back" wrapText="true">
+         <font>
+            <Font name="Roboto Light" size="23.0" />
+         </font>
+         <effect>
+            <Glow />
+         </effect>
+         <tooltip>
+            <Tooltip text="Back to main menu" />
+         </tooltip>
+      </Button>
       <ImageView fitHeight="75.0" fitWidth="90.0" layoutX="19.0" layoutY="33.0">
          <image>
             <Image url="@/icons8-back-100.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="82.0" fitWidth="84.0" layoutX="25.0" layoutY="29.0">
-         <image>
-            <Image url="@../../../../images/icons8-back-100.png" />
          </image>
       </ImageView>
    </children>

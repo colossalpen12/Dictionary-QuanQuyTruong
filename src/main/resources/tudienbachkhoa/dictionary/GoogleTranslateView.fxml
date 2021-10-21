@@ -15,7 +15,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1080.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tudienbachkhoa.dictionary.GoogleTranslateController">
     <children>
-        <AnchorPane layoutX="160.0" prefHeight="163.0" prefWidth="453.0" style="-fx-background-color: #485460#485460 #485460#485460;">
+        <AnchorPane layoutX="160.0" prefHeight="163.0" prefWidth="924.0" style="-fx-background-color: #485460#485460 #485460#485460; -fx-background-radius: 0 15 0 0;">
             <children>
                 <ImageView fitHeight="91.0" fitWidth="95.0" layoutX="31.0" layoutY="39.0" preserveRatio="true">
                     <image>
@@ -27,12 +27,11 @@
                         <Font name="Roboto Light" size="49.0" />
                     </font>
                 </Label>
-                <ImageView fitHeight="34.0" fitWidth="31.0" layoutX="1042.0" layoutY="3.0" preserveRatio="true">
-                    <image>
-                        <Image url="@/icons8-exit-100.png" />
-                    </image>
-                </ImageView>
-                <Button layoutX="1039.0" layoutY="3.0" mnemonicParsing="false" onAction="#ExitApp" opacity="0.0" prefHeight="34.0" prefWidth="40.0" text="exit" />
+            <JFXButton fx:id="exitButton" layoutX="888.0" layoutY="5.0" maxHeight="32.0" maxWidth="32.0" minHeight="20.0" minWidth="20.0" onAction="#ExitApp" prefHeight="30.0" prefWidth="30.0">
+               <tooltip>
+                  <Tooltip text="Exit app" />
+               </tooltip>
+            </JFXButton>
             </children>
         </AnchorPane>
         <AnchorPane layoutX="-1.0" layoutY="162.0" opacity="0.86" prefHeight="438.0" prefWidth="1084.0" style="-fx-background-color: #485460#485460 #485460#485460 #485460#485460 #485460#485460; -fx-background-radius: 0 0 15 15;">

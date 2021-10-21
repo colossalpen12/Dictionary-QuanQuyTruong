@@ -1,5 +1,6 @@
 package tudienbachkhoa.dictionary;
 
+import com.jfoenix.controls.JFXButton;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -15,11 +16,15 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -33,10 +38,20 @@ public class GoogleTranslateController implements Initializable {
     private Button translate;
     @FXML
     private TextArea output;
+    @FXML
+    private JFXButton exitButton = new JFXButton();
     private ObservableList<String> dictionaries = FXCollections.observableArrayList("English to Vietnamese", "Vietnamese to English");
 
     @Override  //initialize the choiceBox
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        try {
+            ImageView exitIcon = new ImageView(new Image(new FileInputStream("src/images/icons8-exit-100.png")));
+            exitIcon.preserveRatioProperty().set(true);
+            exitIcon.fitHeightProperty().bind(exitButton.widthProperty());
+            exitButton.setGraphic(exitIcon);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
         chooseDictionary.getItems().addAll(dictionaries);
         chooseDictionary.setValue("English to Vietnamese");
     }
