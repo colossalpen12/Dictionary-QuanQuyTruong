@@ -16,7 +16,8 @@ public class WebScraping {
             Element type = doc.select("span.fl").first();
             Elements definitions = doc.select("span.dtText");
             assert type != null;
-            System.out.println(type.text());
+            descriptions.append(type.text());
+            descriptions.append("\n");
             for (Element element : definitions) {
                 descriptions.append(element.text().substring(2));
                 descriptions.append("\n");
