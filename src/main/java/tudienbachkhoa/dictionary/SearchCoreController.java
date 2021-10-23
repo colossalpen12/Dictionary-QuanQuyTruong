@@ -273,4 +273,20 @@ public class SearchCoreController implements Initializable {
         output = new BufferedWriter(new FileWriter("src/main/resources/history.txt"));
         output.close();
     }
+
+    @FXML
+    public void updateDatabase() throws IOException {
+        if (!chooseDictionary.getValue().equals("Merriam-Webster"))
+            DictionaryInput.Retrieve(chooseDictionary.getValue());
+        else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Unsupported feature!");
+            alert.setHeaderText("Merriam-Webster Dictionary does not support database interference.");
+            alert.showAndWait().ifPresent(rs -> {
+                if (rs == ButtonType.OK) {
+                    System.out.println("Ố kê");
+                }
+            });
+        }
+    }
 }
