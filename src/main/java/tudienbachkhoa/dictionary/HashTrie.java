@@ -20,10 +20,17 @@ public class HashTrie {
 
     Node root = new Node();
 
+    public void remove(String key) {
+        Node current = root;
+        for (char c : key.toLowerCase().toCharArray()) {
+            current = current.children.get(c);
+        }
+        current.endOfWord = false;
+    }
+
     public void insert(String key) {
         Node current = root;
-        String tmp = key.toLowerCase();
-        for (char c : tmp.toCharArray()) {
+        for (char c : key.toLowerCase().toCharArray()) {
             if (!current.children.containsKey(c)) {
                 current.children.put(c, new Node(c));
             }

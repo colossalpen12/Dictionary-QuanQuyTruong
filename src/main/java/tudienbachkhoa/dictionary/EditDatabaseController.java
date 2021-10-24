@@ -10,35 +10,29 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
-
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-public class EditDatabaseController implements Initializable {
+public class EditDatabaseController extends SearchCoreController implements Initializable {
 
-    @FXML
-    private JFXButton addButton = new JFXButton();
     @FXML
     private JFXButton removeButton = new JFXButton();
     @FXML
     private JFXButton applyButton = new JFXButton();
-
     public static String dictionary;
     @FXML
     private JFXTextArea edit = new JFXTextArea();
     @FXML
     private TextField input = new TextField();
     @FXML
+
     private JFXListView<String> WordList = new JFXListView<>();
-
-    private Dictionary DictionaryInput = new Dictionary();
-
     private String SelectedWord = null;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        DictionaryInput.Retrieve(dictionary);
+     //   DictionaryInput.Retrieve(dictionary);
         applyButton.disableProperty().set(true);
         removeButton.disableProperty().set(true);
         WordList.getItems().addAll(DictionaryInput.Dict);
@@ -66,7 +60,6 @@ public class EditDatabaseController implements Initializable {
     @FXML
     public void edit_PressEnter(ActionEvent event) {
         edit.setText(edit_definition());
-       // edit.requestFocus();
     }
 
     @FXML
@@ -127,7 +120,6 @@ public class EditDatabaseController implements Initializable {
         if (option.get() == ButtonType.OK) {
             DictionaryInput.apply(SelectedWord, edit.getText(), dictionary);
             refreshWordList();
-        } else {
         }
         edit.setText(DictionaryInput.WordMap.get(SelectedWord));
         applyButton.disableProperty().set(true);
@@ -141,10 +133,8 @@ public class EditDatabaseController implements Initializable {
     }
 
     public void refreshWordList() {
-        DictionaryInput.Retrieve(dictionary);
         WordList.getItems().clear();
         WordList.getItems().addAll(DictionaryInput.ListOfWord.prefixMatching(input.getText().toLowerCase()));
         WordList.refresh();
     }
-
 }

@@ -56,7 +56,7 @@ public class SearchCoreController implements Initializable {
     /**
      * initialize the Dictionary
      **/
-    private Dictionary DictionaryInput = new Dictionary();
+    protected static Dictionary DictionaryInput = new Dictionary();
 
     private final ObservableList<String> dictionaries = FXCollections.observableArrayList("English to English", "English to Vietnamese"
             , "Vietnamese to English", "Merriam-Webster");
@@ -274,7 +274,7 @@ public class SearchCoreController implements Initializable {
         output.close();
     }
 
-    @FXML
+  /**  @FXML
     public void updateDatabase() throws IOException {
         if (!chooseDictionary.getValue().equals("Merriam-Webster"))
             DictionaryInput.Retrieve(chooseDictionary.getValue());
@@ -288,5 +288,6 @@ public class SearchCoreController implements Initializable {
                 }
             });
         }
-    }
+    } **/
+
 }
