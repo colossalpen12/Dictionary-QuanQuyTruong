@@ -1,64 +1,93 @@
-import java.sql.*;
-import java.util.*;
+package tudienbachkhoa.dictionary;
+
+import java.sql.SQLException;
+import java.sql.ResultSet;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Dictionary {
-    static class Word {
-        String word_explain;
-        String word_target;
-
-        Word (String word_explain, String word_target) {
-            this.word_target = word_target;
-            this.word_explain = word_explain;
-        }
-    }
-
-    public ArrayList<Word> Dict = new ArrayList<>();
-    HashTrie demo = new HashTrie();
-    public Map<String, String> demo_map = new HashMap<>();
+    public ArrayList<String> Dict;
+    public HashTrie ListOfWord;
+    public Map<String, String> WordMap;
+    private final String url = "jdbc:sqlite:C:/Users/quyhd/Downloads/AVIE.db";  //sửa lại theo đường dẫn absolute của mỗi máy
 
     /**
      * choose modes for dictionary (av, va, aa)
+     *
      * @return preferred mode
      */
-    static String chooseMode() {
-        Scanner sc = new Scanner(System.in);
-        return sc.next();
+    static String chooseMode(String dictionary) {
+        if (dictionary.equals("English to English"))
+            return "aa";
+        else if (dictionary.equals("Vietnamese to English"))
+            return "va";
+        return "av";
     }
 
     /**
      * Retrieve selected data from sqlite database
      */
-    public void Retrieve() {
-        // change url to "jbdc:sqlite:path to database"
-        String url = "jdbc:sqlite:C:/Users/quyhd/Downloads/AVIE.db";
-        String sql = "SELECT word, description FROM " + chooseMode();
+    public void Retrieve(String dictionary) {
+        String sql = "SELECT word, description FROM " + chooseMode(dictionary);
+        Dict = new ArrayList<>();
+        ListOfWord = new HashTrie();
+        WordMap = new HashMap<>();
         try {
             Connection conn = DriverManager.getConnection(url);
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
             while (rs.next()) {
-                Dict.add(new Word(rs.getString("description"), rs.getString("word")));
-                demo.insert(rs.getString("word"));
-                demo_map.put(rs.getString("word"), rs.getString("description"));
+                Dict.add(rs.getString("word"));
+                ListOfWord.insert(rs.getString("word"));
+                WordMap.put(rs.getString("word"), rs.getString("description"));
             }
-        } catch(SQLException e) {
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
     }
 
-    public static void main(String[] args) {
-        Dictionary demo = new Dictionary();
-        demo.Retrieve();
-        Scanner sc = new Scanner(System.in);
-        String wordToFind = sc.next();
-        if (demo.demo.search(wordToFind)) {
-            System.out.println("Word found!");
-            System.out.println(demo.demo_map.get(wordToFind));
-        } else
-            System.out.println("Word not found");
-        List<String> rs = demo.demo.prefixMatching(wordToFind);
-        for (String s : rs) {
-            System.out.println(s);
+    /**
+     * database manipulation
+     **/
+    public void insert(String newWord, String definition, String dictionary) {
+        String sql = "INSERT INTO " + chooseMode(dictionary) + " VALUES (null, '" + newWord + "', null, '" + definition + "', null)";
+        try {
+            Connection conn = DriverManager.getConnection(url);
+            Statement ps = conn.createStatement();
+            ps.executeUpdate(sql);
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
+        WordMap.put(newWord, definition);
+        ListOfWord.insert(newWord);
+    }
+
+    public void delete(String oldWord, String dictionary) {
+        String sql = "DELETE FROM " + chooseMode(dictionary) + " WHERE word = '" + oldWord +"'";
+        try {
+            Connection conn = DriverManager.getConnection(url);
+            Statement ps = conn.createStatement();
+            ps.executeUpdate(sql);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        WordMap.remove(oldWord);
+        ListOfWord.remove(oldWord);
+    }
+
+    public void apply(String thisWord, String definition, String dictionary) {
+        String sql = "UPDATE " + chooseMode(dictionary) + " SET description = '" + definition + "' WHERE word = '" + thisWord + "'";
+        try {
+            Connection conn = DriverManager.getConnection(url);
+            Statement ps = conn.createStatement();
+            ps.executeUpdate(sql);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        WordMap.put(thisWord, definition);
     }
 }
